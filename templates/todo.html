@@ -1,0 +1,53 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+<header class="masthead "
+        style="background-image: url({{ url_for('static', filename='images/todo.jpg')}});
+        background-repeat:repeat;background-size:cover; background-position: center;height:1900px;">
+<div class="container container-fluid" style="height:600px;padding:1% 0 0 5%;width:100%; margin:0;color:white;">
+<br>
+<a href="{{url_for('add_task')}}" style="margin-left:1% 0;">
+    <button class="btn btn-dark" style="font-size:2rem;padding:0.5% 0;" type="button">➕ Add Task</button>
+</a>
+
+<h1 style="padding:1.5%;">Task-List</h1>
+
+<table class="table table-hover table-dark">
+    <thead>
+    <tr style="font-size:2rem;">
+        <th scope="col">#</th>
+        <th scope="col">Task</th>
+        <th scope="col">SubTask</th>
+        <th scope="col">Delegated</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th scope="col">Status</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for task in display_tasks %}
+    <tr style="font-size:1.8rem;">
+        <th scope="row">{{task.id}}</th>
+        <td>{{task.task_name}}</td>
+        <td>{{task.subtask_name}}</td>
+        <td>{{task.delegated_to}}</td>
+        <td>{{task.task_start_date}}</td>
+        <td>{{task.task_completed_date}}</td>
+        <td>{{task.status}}</td>
+        <td>{{task.notes}}</td>
+        <td><a href="{{url_for('edit_task',index=task.id)}}" style="color:#3EDBF0;font-size:3rem;text-align:center;"><i class="fas fa-edit"></i></a></td>
+        <td><a href="{{url_for('delete_task',index=task.id)}}" style="color:red;font-size:3rem;text-align:center;"><i class="fas fa-trash-alt"></i></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>
+</header>
+{% include "footer.html" %}
+{% endblock %}

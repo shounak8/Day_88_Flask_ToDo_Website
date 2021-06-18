@@ -1,0 +1,68 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+<header class="masthead "
+        style="background-image: url({{ url_for('static', filename='images/about.jpg')}});
+        background-repeat:no-repeat;background-size:cover; background-position: center center;height:800px;">
+    <div class="container-fluid start-end"
+         style="width:80%;text-align:left; margin:auto;padding:10% 0 0 15%; color:black;">
+        <h1 style="padding:1% 0;font-size:4rem;"> We are a team of passionate technology lovers.
+            <p style="padding:2% 0;">We are always on lookout for upcoming technologies so as to use the best in the business for our clients.</p>
+            We are constantly looking for opportunities for collaboration to improve the scale of our outputs </h1>
+
+        <div class="container-fluid contact-info">
+            <p style="font-size:4rem;">You can contact us via:</p>
+            <p style="font-size:3rem;"><i class="fas fa-envelope-open-text"></i><a href="mailto:shounak8@icloud.com">
+                shounak8@icloud.com</a></p>
+            <p style="font-size:30px;"><i class="fas fa-phone-volume"></i> +91 9970536215</p>
+            <p style="font-size:40px;">
+                <a href="https://www.linkedin.com/in/shounak-deshpande-ab80b0105/"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/shounak8" style="padding: 0 5%;"><i class="fab fa-github-square"></i></a>
+                <a href="https://www.facebook.com/shounak.deshpande"><i class="fab fa-facebook-square"></i></a>
+            </p>
+
+        </div>
+    </div>
+
+</header>
+<div class="container-fluid"
+     style="background-color:#212529;color:white;text-align:center;font-size:2rem;padding:1% 0 0 0;">
+    <div id="feedback_id" style="width:40%;margin:auto;padding:0 0 2% 0;color:white;">
+        <p style="font-size:3rem;"><i class="fas fa-comments" style="padding:0 3%;"></i>Feedback<i
+                class="fas fa-comments" style="padding:0 3%;"></i></p>
+        <p>Tell us about experience here....</p>
+        {{ wtf.quick_form(feedback_form, novalidate=True, button_map={"submit": "secondary"}) }}
+    </div>
+</div>
+<div style="color:black;background-image: url({{ url_for('static', filename='images/testimonial.jpg')}});
+background-repeat:repeat;background-size:cover; background-position: center center;">
+    <h1 style="text-align:center;padding:2%;font-size:6rem;">🤩 Testimonials 💟</h1>
+    <div style="padding:1%;">
+        {% for feedback in feedback_display %}
+        <div style="padding:0.3%;">
+            <div style="border-radius: 25px; background-color:#FFF5EB;border: 2px solid #2F5D62;
+                      padding: 0.5% 2%;
+                      width: 60%; margin:auto;">
+                <div class="commenterImage">
+                    <img style="border-radius:50%;" src="{{ feedback.commentator_email | gravatar }}"/>
+                </div>
+                <h4 style="font:italic bold;">{{feedback.commentator_name}}</h4>
+                <h6 style="font-style:italic;">{{feedback.comment_date}}</h6>
+                <h1>"{{feedback.comment}}"</h1>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+
+</div>
+
+
+{% include "footer.html" %}
+{% endblock %}

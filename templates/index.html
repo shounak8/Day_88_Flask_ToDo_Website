@@ -1,0 +1,41 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+<header class="masthead "
+        style="background-image: url({{ url_for('static', filename='images/index.jpg')}});
+        background-repeat:no-repeat;background-size:cover; background-position: center center;height:700px;">
+<div class="container" style="height:600px;padding: 0 0 2% 0;margin:auto;color:white;">
+    <div class="row" style="padding: 10% 10% 0 30%;">
+        <div class="col-lg-6 col-md-6 col-sm-12 login_form">
+            <h1 style="text-align:center;padding:0 0 10% 0;">Login</h1>
+            {{ wtf.quick_form(login_form, novalidate=True, button_map={"submit": "primary"}) }}<br><br>
+<div style="margin:auto; text-align:center;">
+            <p style="font-size:2rem;"><i class="fas fa-lock"></i> Forgot Password? <i class="fas fa-key"></i></p>⬇<br>
+            <a href="send_code" style="margin:auto;">
+                <button class="btn btn-primary btn-lg" type="button">Forgot Password</button>
+            </a>
+</div>
+        </div>
+
+        {% if get_flashed_messages(): %}
+        <div class="alert alert-warning" role="alert" style="text-align:center;width:30%;margin:auto;font-size:2rem;">
+            {{ get_flashed_messages()[0] }}
+        </div>
+        {% endif %}
+
+        <div class="col-lg-6 col-md-6 col-sm-12 login_form" style="margin:auto;width:30%; text-align:center;">
+            <p>If not a member yet, please Register</p>⬇<br>
+            <a href="{{url_for('register')}}">
+                <button class="btn btn-primary btn-lg" type="button">Register</button>
+            </a>
+
+        </div>
+
+    </div>
+</div>
+</header>
+
+{% include "footer.html" %}
+{% endblock %}

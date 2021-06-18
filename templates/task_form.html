@@ -1,0 +1,28 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+<header class="masthead "
+        style="background-image: url({{ url_for('static', filename='images/task_form.jpg')}});
+        background-repeat:no-repeat;background-size:cover; background-position: center center;height:800px;">
+    <div class="container-fluid start-end">
+        <div style="text-align:center;padding:2% 0 0 0;">
+            <h1>Task-Form</h1>
+            <i class="fas fa-clipboard-list" style="font-size:5rem;"></i>
+        </div>
+        <div class="task_form">
+            {% if task== 'add' %}
+            <h2 style="text-align:center;">Add form <i class="fas fa-plus-square"></i></h2>
+            {{ wtf.quick_form(task_form, novalidate=True, button_map={"submit": "dark"}) }}
+
+            {% else %}
+            <h2 style="text-align:center;">Edit form <i class="fas fa-pen-square"></i></h2>
+            {{ wtf.quick_form(task_form, novalidate=True, button_map={"submit": "dark"}) }}
+
+            {% endif %}
+        </div>
+    </div>
+</header>
+{% include "footer.html" %}
+{% endblock %}
